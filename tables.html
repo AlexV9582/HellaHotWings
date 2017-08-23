@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hella Hot Wings</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+ <div class="container">
+    <div class="text-center jumbotron">
+        <h1> Hella Hot Wings</h1>
+        <h2>Currently booked tables and waiting list for our butt kickin sauce!</h2>
+        <hr>
+         <a href="/"> <button type="button" class="btn btn-secondary btn-lg"><span class="glyphicon glyphicon-home"></span> Home</button></a>
+         <a href="/reservations"> <button type="button" class="btn btn-warning btn-lg"><span class="glyphicon glyphicon-saved"></span> Save Reservation</button></a>
+
+   <div class="row">
+
+     <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">Reservations</h4>
+            </div>
+            <div class="panel-body" id="reservation">
+            </div>
+      </div>
+    </div>
+
+    <div class="col-lg-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="panel-title">Wait List</h4>
+        </div>
+        <div class="panel-body" id="waitlist">
+        </div>
+  </div>
+</div>
+
+
+
+   </div>
+    </div>
+ </div>
+</body>
+    <script type="text/javascript">
+        $.get("/api/tables", function(data) {
+        console.log(data);
+            for (i = 0; i < 5; i++) {
+                $("#reservation").append("<div class='well'><h2>" + data[i].reserve_uniqueID + "</h2></div>");
+            }
+        })
+        $.get("/api/waitlist", function(data) {
+        console.log(data);
+        for (i = 0; i < data.length; i++) {
+            $("#waitlist").append("<div class='well'><h2>" + data[i].reserve_uniqueID + "</h2></div>");
+            }
+        })    
+    </script>
+    
+</html>
